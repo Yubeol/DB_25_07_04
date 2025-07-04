@@ -1,0 +1,32 @@
+import mysql.connector
+
+# 데이터베이스 연결
+# 커넥션 설정
+conn = mysql.connector.connect(
+    host='127.0.0.1',
+    user='root',
+    password='1234',
+    database='firstDB'
+)
+
+
+# 커넥션 수행. 연결
+cur = conn.cursor()
+
+# 데이터 삽입 #'''세개는 여러줄을 거쳐서 쓸때 사용
+id=input('id: ')
+pw=input('password: ')
+name=input('name: ')
+age=input('age: ')
+cur.execute('INSERT INTO mem (mid, pass,name, age) values(%s, %s, %s, %s);',(id, pw, name, age))
+conn.commit()
+
+#테이블 검색
+cur.execute('SELECT * FROM mem')
+rows = cur.fetchall()
+for row in rows:
+    print(row)
+
+# 변경 사항 저장
+# conn.commit()
+conn.close()
