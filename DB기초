@@ -1,0 +1,36 @@
+use testdb;
+
+select cid, ctitle, cdate, name
+from content, mem
+where content.mid=mem.mid
+order by cdate desc;
+
+-- insert into 테이블(칼럽명,...) values(값,...);
+insert into mem(mid,pass,name,age)
+values('m03','1111','도우너',1000);
+select * from mem;
+insert into mem(mid,pass,name,age)
+values('m04','1111','마이콜',20),('m05','1111','또치', 12);
+insert into mem values('m06','1111','철수',13);
+
+insert into content(ctitle, ccontent, mid)
+values('sql로 삽입','1111','m06');
+insert into content(ctitle, cdate, mid)
+values('sql로 삽입','2025-07-04','m05');
+select * from content;
+
+insert into content(ccontent) values('안된다는 것을 나는 안다.');
+
+select * from content;
+
+-- 데이터삭제질의 delete from 테이블 where 조건; --
+delete from mem where mem.name='또치';
+delete from content where cid=4;
+
+-- 데이터 수정하기 update 테이블 set 필드명=값,... where 조건;
+-- 질의어를 본 소감=> 줄(행) 단위의 작업
+select pass, age from mem where mid='m02';
+update mem 
+set pass='1111', age=age+1 
+where mid='m02';
+
